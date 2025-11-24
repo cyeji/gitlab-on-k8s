@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-gitlab-postgresql-0
+  namespace: gitlab-test
+spec:
+  storageClassName: ""
+  volumeName: data-gitlab-postgresql-0-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-gitlab-postgresql-0-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 50Gi
+  hostPath:
+    path: /data/gitlab/postgresql-1
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-data-gitlab-redis-master-0
+  namespace: gitlab-test
+spec:
+  storageClassName: ""
+  volumeName: redis-data-gitlab-redis-master-0-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-data-gitlab-redis-master-0-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 50Gi
+  hostPath:
+    path: /data/gitlab/redis-master-1
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: repo-data-gitlab-gitaly-0
+  namespace: gitlab-test
+spec:
+  storageClassName: ""
+  volumeName: repo-data-gitlab-gitaly-0-pv 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: repo-data-gitlab-gitaly-0-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 50Gi
+  hostPath:
+    path: /data/gitlab/gitaly-1
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Retain
